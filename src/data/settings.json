@@ -1,0 +1,42 @@
+{
+  "pure_buy": {
+    "type": "+원",
+    "value": 1
+  },
+  "pure_sell": {
+    "type": "+원",
+    "value": 2
+  },
+  "k18_buy": {
+    "type": "+원",
+    "value": 3
+  },
+  "k18_sell": {
+    "type": "+원",
+    "value": 4
+  },
+  "k14_buy": {
+    "type": "+원",
+    "value": 5
+  },
+  "k14_sell": {
+    "type": "+원",
+    "value": 6
+  },
+  "plat_buy": {
+    "type": "+원",
+    "value": 7
+  },
+  "plat_sell": {
+    "type": "+원",
+    "value": 8
+  },
+  "silver_buy": {
+    "type": "+원",
+    "value": 9
+  },
+  "silver_sell": {
+    "type": "+원",
+    "value": 0
+  }
+}
