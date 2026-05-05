@@ -81,7 +81,19 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    height: auto;
+    padding: 1rem;
+  }
+
   .nav {
-    display: none; /* Hide on mobile for simplicity in demo */
+    gap: 1.5rem;
+  }
+
+  .nav a.active::after {
+    bottom: -10px;
   }
 }
