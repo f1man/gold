@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description: "Real-time gold price tracker, updated 4 times a day with premium charts.",
 };
 
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -14,7 +17,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        {children}
+        <Header />
+        <main className="mainContent">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

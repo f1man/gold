@@ -1,7 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import PriceCards from '@/components/PriceCards';
 import { fetchOriginalGoldData } from '@/utils/goldApi';
 
@@ -93,23 +91,19 @@ export default async function Home() {
   const refDate = currentPrices.date || '데이터 없음';
 
   return (
-    <>
-      <Header />
-      <main className="container">
-        {data && data.length > 0 ? (
-          <div>
-            <PriceCards current={currentPrices} previous={prevPrices} />
-            <div style={{ marginTop: '1rem', textAlign: 'right', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-              기준일자: <strong>{refDate}</strong>
-            </div>
+    <div className="container" style={{ padding: '3rem 1.5rem' }}>
+      {data && data.length > 0 ? (
+        <div>
+          <PriceCards current={currentPrices} previous={prevPrices} />
+          <div style={{ marginTop: '1rem', textAlign: 'right', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            기준일자: <strong>{refDate}</strong>
           </div>
-        ) : (
-          <div style={{ padding: '4rem 0', textAlign: 'center', color: 'var(--text-muted)' }}>
-            데이터를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.
-          </div>
-        )}
-      </main>
-      <Footer />
-    </>
+        </div>
+      ) : (
+        <div style={{ padding: '4rem 0', textAlign: 'center', color: 'var(--text-muted)' }}>
+          데이터를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.
+        </div>
+      )}
+    </div>
   );
 }
