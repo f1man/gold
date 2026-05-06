@@ -238,38 +238,40 @@ export default function InvoicePage() {
                 </div>
               )}
 
-              <div className={styles.row3} style={{ marginTop: '1rem' }}>
-                <div className={styles.formGroup}>
-                  <label>중량</label>
-                  <input 
-                    type="text" 
-                    className={styles.input} 
-                    value={item.weight || ''}
-                    onChange={e => updateItem(item.id, 'weight', e.target.value)} 
-                    placeholder="예: 3.75g"
-                  />
+              {item.type === '금' && (
+                <div className={styles.row3} style={{ marginTop: '1rem' }}>
+                  <div className={styles.formGroup}>
+                    <label>중량</label>
+                    <input 
+                      type="text" 
+                      className={styles.input} 
+                      value={item.weight || ''}
+                      onChange={e => updateItem(item.id, 'weight', e.target.value)} 
+                      placeholder="예: 3.75g"
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>제원</label>
+                    <input 
+                      type="text" 
+                      className={styles.input} 
+                      value={item.spec || ''}
+                      onChange={e => updateItem(item.id, 'spec', e.target.value)} 
+                      placeholder="자유 입력"
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>원석</label>
+                    <input 
+                      type="text" 
+                      className={styles.input} 
+                      value={item.gemstone || ''}
+                      onChange={e => updateItem(item.id, 'gemstone', e.target.value)} 
+                      placeholder="예: 다이아몬드"
+                    />
+                  </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <label>제원</label>
-                  <input 
-                    type="text" 
-                    className={styles.input} 
-                    value={item.spec || ''}
-                    onChange={e => updateItem(item.id, 'spec', e.target.value)} 
-                    placeholder="자유 입력"
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <label>원석</label>
-                  <input 
-                    type="text" 
-                    className={styles.input} 
-                    value={item.gemstone || ''}
-                    onChange={e => updateItem(item.id, 'gemstone', e.target.value)} 
-                    placeholder="예: 다이아몬드"
-                  />
-                </div>
-              </div>
+              )}
 
               <div className={styles.formGroup}>
                 <label>수량</label>
@@ -370,7 +372,7 @@ export default function InvoicePage() {
                             {item.type}
                           </span>
                         </td>
-                        <td>{item.name || '—'}</td>
+                        <td>{item.type === '다이아' ? `[다이아] ${item.name || ''}` : (item.name || '—')}</td>
                         <td style={{ fontSize: '0.8rem' }}>{getSpec()}</td>
                         <td style={{ fontSize: '0.8rem' }}>{item.weight || '—'}</td>
                         <td style={{ fontSize: '0.8rem' }}>{item.gemstone || '—'}</td>
