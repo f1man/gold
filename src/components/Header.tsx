@@ -8,6 +8,8 @@ import { usePathname } from 'next/navigation';
 export default function Header() {
   const pathname = usePathname();
 
+  if (pathname === '/bespoke') return null;
+
   return (
     <header className={styles.header}>
       <div className={`container ${styles.container}`}>
