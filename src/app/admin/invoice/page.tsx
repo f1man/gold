@@ -13,6 +13,9 @@ interface InvoiceItem {
   color?: string;
   size?: string;
   qty?: number;
+  weight?: string;
+  spec?: string;
+  gemstone?: string;
 }
 
 export default function InvoicePage() {
@@ -23,7 +26,7 @@ export default function InvoicePage() {
   
   // Dynamic Items
   const [items, setItems] = useState<InvoiceItem[]>([
-    { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG' }
+    { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '' }
   ]);
   
   const [receiptNum, setReceiptNum] = useState('');
@@ -47,7 +50,7 @@ export default function InvoicePage() {
   };
 
   const addItem = () => {
-    setItems([...items, { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG' }]);
+    setItems([...items, { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '' }]);
   };
 
   const removeItem = (id: number) => {
@@ -235,7 +238,40 @@ export default function InvoicePage() {
                 </div>
               )}
 
-              <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
+              <div className={styles.row3} style={{ marginTop: '1rem' }}>
+                <div className={styles.formGroup}>
+                  <label>중량</label>
+                  <input 
+                    type="text" 
+                    className={styles.input} 
+                    value={item.weight || ''}
+                    onChange={e => updateItem(item.id, 'weight', e.target.value)} 
+                    placeholder="예: 3.75g"
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>제원</label>
+                  <input 
+                    type="text" 
+                    className={styles.input} 
+                    value={item.spec || ''}
+                    onChange={e => updateItem(item.id, 'spec', e.target.value)} 
+                    placeholder="자유 입력"
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>원석</label>
+                  <input 
+                    type="text" 
+                    className={styles.input} 
+                    value={item.gemstone || ''}
+                    onChange={e => updateItem(item.id, 'gemstone', e.target.value)} 
+                    placeholder="예: 다이아몬드"
+                  />
+                </div>
+              </div>
+
+              <div className={styles.formGroup}>
                 <label>수량</label>
                 <input 
                   type="number" 
@@ -310,30 +346,40 @@ export default function InvoicePage() {
                 <tr>
                   <th>구분</th>
                   <th>제품명</th>
-                  <th>스펙</th>
+                  <th>제원(스펙)</th>
+                  <th>중량</th>
+                  <th>원석</th>
                   <th style={{ textAlign: 'center' }}>수량</th>
                 </tr>
               </thead>
               <tbody>
                 {items.length === 0 ? (
-                  <tr className={styles.noData}><td colSpan={4}>등록된 제품이 없습니다</td></tr>
+                  <tr className={styles.noData}><td colSpan={6}>등록된 제품이 없습니다</td></tr>
                 ) : (
-                  items.map(item => (
-                    <tr key={item.id}>
-                      <td>
-                        <span className={`${styles.badge} ${item.type === '금' ? styles.badgeMaterial : ''}`}>
-                          {item.type}
-                        </span>
-                      </td>
-                      <td>{item.name || '—'}</td>
-                      <td>
-                        {item.type === '금' ? `${item.material} / ${item.color}` : item.size}
-                      </td>
-                      <td style={{ textAlign: 'center', fontWeight: 500 }}>
-                        {item.qty || 1} 개
-                      </td>
-                    </tr>
-                  ))
+                  items.map(item => {
+                    const getSpec = () => {
+                      let text = item.type === '금' ? `${item.material} / ${item.color}` : item.size;
+                      if (item.spec) text += ` / ${item.spec}`;
+                      return text;
+                    };
+
+                    return (
+                      <tr key={item.id}>
+                        <td>
+                          <span className={`${styles.badge} ${item.type === '금' ? styles.badgeMaterial : ''}`}>
+                            {item.type}
+                          </span>
+                        </td>
+                        <td>{item.name || '—'}</td>
+                        <td style={{ fontSize: '0.8rem' }}>{getSpec()}</td>
+                        <td style={{ fontSize: '0.8rem' }}>{item.weight || '—'}</td>
+                        <td style={{ fontSize: '0.8rem' }}>{item.gemstone || '—'}</td>
+                        <td style={{ textAlign: 'center', fontWeight: 500 }}>
+                          {item.qty || 1} 개
+                        </td>
+                      </tr>
+                    );
+                  })
                 )}
               </tbody>
             </table>

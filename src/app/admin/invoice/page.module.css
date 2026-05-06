@@ -235,6 +235,9 @@
 /* Row 2-col */
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
+/* Row 3-col */
+.row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
 /* ── RECEIPT PANEL ── */
 .receiptPanel {
   background: #FFFFFF;
