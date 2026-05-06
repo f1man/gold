@@ -3,6 +3,7 @@
 import styles from './Header.module.css';
 import { Gem } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
@@ -14,7 +15,7 @@ export default function Header() {
     <header className={styles.header}>
       <div className={`container ${styles.container}`}>
         <Link href="/" className={styles.logo} style={{ textDecoration: 'none' }}>
-          <Gem className={styles.logoIcon} />
+          <Image src="/logo.png" alt="JASMIN GOLD CI" width={32} height={32} style={{ objectFit: 'contain' }} />
           <span className={styles.logoText}>JASMIN GOLD</span>
         </Link>
         <nav className={styles.nav}>

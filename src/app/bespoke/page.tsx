@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './page.module.css';
 
 export default function BespokePage() {
@@ -77,9 +78,9 @@ export default function BespokePage() {
 
       {/* Header */}
       <header className={styles.header}>
-        <Link href="/" className={styles.logo}>
-          <div className={styles.logoMark}></div>
-          <span className={styles.logoText}>KOREA GOLD EXCHANGE</span>
+        <Link href="/" className={styles.logo} style={{ textDecoration: 'none' }}>
+          <Image src="/logo.png" alt="JASMIN GOLD CI" width={32} height={32} style={{ objectFit: 'contain' }} />
+          <span className={styles.logoText}>JASMIN GOLD</span>
         </Link>
         <nav className={styles.nav}>
           <Link href="/">시세조회</Link>
@@ -122,7 +123,7 @@ export default function BespokePage() {
         </div>
 
         <div className={styles.heroContent}>
-          <p className={styles.heroEyebrow}>KOREA GOLD EXCHANGE — PRIVATE ATELIER</p>
+          <p className={styles.heroEyebrow}>JASMIN GOLD — PRIVATE ATELIER</p>
           <div className={styles.ornamentLine}>
             <span></span>
             <i>SINCE 1995</i>
@@ -217,7 +218,7 @@ export default function BespokePage() {
         <span className={styles.quoteMark}>&quot;</span>
         <blockquote className={styles.reveal}>
           <p>완성된 작품은 단순한 장신구를 넘어,<br/>대를 이어 물려줄 수 있는<br/>가문(家門)의 유산이 될 것입니다.</p>
-          <cite>— KOREA GOLD EXCHANGE, MASTER ATELIER</cite>
+          <cite>— JASMIN GOLD, MASTER ATELIER</cite>
         </blockquote>
       </section>
 
@@ -243,7 +244,7 @@ export default function BespokePage() {
 
       {/* Footer */}
       <footer className={styles.footer}>
-        <div className={styles.footerLogo}>KOREA GOLD EXCHANGE</div>
+        <div className={styles.footerLogo}>JASMIN GOLD</div>
         <div className={styles.footerCopy}>© 2026 Gold Price Tracker. All rights reserved.</div>
         <div className={styles.footerNote}>이 웹사이트는 한국금거래소의 시세 데이터를 바탕으로 구현된 데모 페이지입니다.</div>
       </footer>
