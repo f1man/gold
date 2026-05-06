@@ -91,26 +91,26 @@ export default function InquiryList() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th style={{ width: '10%' }}>상태</th>
               <th style={{ width: '50%' }}>제목</th>
               <th style={{ width: '20%' }}>작성자</th>
-              <th style={{ width: '20%' }}>작성일</th>
+              <th style={{ width: '15%' }}>작성일</th>
+              <th style={{ width: '15%', textAlign: 'center' }}>상태</th>
             </tr>
           </thead>
           <tbody>
             {inquiries.map((inquiry) => (
               <tr key={inquiry.id} className={styles.row} onClick={() => handleRowClick(inquiry.id)}>
                 <td>
-                  <span className={`${styles.status} ${inquiry.hasReply ? styles.statusComplete : styles.statusPending}`}>
-                    {inquiry.hasReply ? '답변완료' : '답변대기'}
-                  </span>
-                </td>
-                <td>
                   <Lock className={styles.lockIcon} />
                   {inquiry.title}
                 </td>
                 <td>{inquiry.author.substring(0, 1)}**</td>
                 <td>{formatDate(inquiry.createdAt)}</td>
+                <td style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
+                  <span className={`${styles.status} ${inquiry.hasReply ? styles.statusComplete : styles.statusPending}`}>
+                    {inquiry.hasReply ? '답변완료' : '답변대기'}
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
