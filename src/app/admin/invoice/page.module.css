@@ -172,82 +172,58 @@
   box-shadow: 0 4px 14px rgba(232,160,176,0.4);
 }
 
-/* ── DIAMOND SECTION ── */
-.diamondHeader {
+/* ── DYNAMIC ITEMS ── */
+.itemBlock {
+  background: #FDF6F8;
+  border: 1px solid #F0D8DE;
+  border-radius: 12px;
+  padding: 1.4rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.itemHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed #F0D8DE;
 }
-.diamondHeader label { margin: 0; }
-.btnAdd {
+.itemHeader label { margin: 0; color: #9E6678; font-weight: 600; font-size: 0.9rem; }
+.btnRemoveItem {
+  background: none;
+  border: none;
+  color: #C4A0AC;
+  cursor: pointer;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  background: linear-gradient(135deg, #F2C4CE, #E8A0B0);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 0.4rem 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  letter-spacing: 0.05em;
+  justify-content: center;
+  transition: color 0.2s;
 }
-.btnAdd:hover { box-shadow: 0 4px 12px rgba(232,160,176,0.5); transform: translateY(-1px); }
-
-.diamondList { display: flex; flex-direction: column; gap: 0.6rem; }
-
-.diamondRow {
-  display: grid;
-  grid-template-columns: 1fr 100px 36px;
-  gap: 0.5rem;
-  align-items: center;
-  animation: slideIn 0.25s cubic-bezier(0.23,1,0.32,1);
-}
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.diamondRow select {
-  padding: 0.65rem 0.8rem;
-  border: 1.5px solid #F0D8DE;
-  border-radius: 10px;
+.btnRemoveItem:hover { color: #C97D8F; }
+.btnAddItem {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: 1.5px dashed #F0D8DE;
+  border-radius: 12px;
+  color: #9E6678;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 0.95rem;
-  color: #3A2530;
-  background: #FDF6F8;
-  outline: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C97D8F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 28px;
+  font-weight: 500;
   cursor: pointer;
-  transition: border-color 0.2s;
-}
-.diamondRow select:focus { border-color: #E8A0B0; outline: none; }
-
-.qtyInput {
-  padding: 0.65rem 0.5rem !important;
-  text-align: center;
-}
-
-.btnDel {
-  width: 36px; height: 36px;
-  border: 1.5px solid #F0D8DE;
-  border-radius: 8px;
-  background: #FDF6F8;
-  color: #C4A0AC;
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
   transition: all 0.2s;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
-.btnDel:hover { background: #FFE8EE; border-color: #E8A0B0; color: #C97D8F; }
+.btnAddItem:hover {
+  background: #FDF6F8;
+  border-color: #E8A0B0;
+  color: #C97D8F;
+}
 
 /* ── DIVIDER ── */
 .formDivider {
@@ -375,36 +351,36 @@
 }
 .rVal.empty { color: #D8C0C8; font-weight: 300; font-style: italic; }
 
-/* Diamond table */
-.diamondTable {
+/* Product Table */
+.productTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
-.diamondTable th {
+.productTable th {
   font-family: 'Cinzel', serif;
   font-size: 0.6rem;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.15em;
   color: #9E6678;
   text-align: left;
-  padding: 0.5rem 0.5rem;
+  padding: 0.6rem 0.5rem;
   background: linear-gradient(to right, #FDE8EE, #FAF0F2);
-  font-weight: 400;
+  font-weight: 600;
+  border-bottom: 2px solid #F2C4CE;
 }
-.diamondTable td {
-  padding: 0.65rem 0.5rem;
+.productTable td {
+  padding: 0.75rem 0.5rem;
   color: #3A2530;
   border-bottom: 1px solid #F5E0E6;
-  font-size: 0.9rem;
 }
-.diamondTable tr:last-child td { border-bottom: none; }
-.diamondTable .noData td {
+.productTable tr:last-child td { border-bottom: none; }
+.productTable .noData td {
   color: #D8C0C8;
   font-style: italic;
   font-size: 0.85rem;
   text-align: center;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
 }
 
 /* Badge chips */

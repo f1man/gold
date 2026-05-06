@@ -3,10 +3,16 @@
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 
-interface DiamondSpec {
+type ItemType = '금' | '다이아';
+
+interface InvoiceItem {
   id: number;
-  size: string;
-  qty: number;
+  name: string;
+  type: ItemType;
+  material?: string;
+  color?: string;
+  size?: string;
+  qty?: number;
 }
 
 export default function InvoicePage() {
@@ -14,10 +20,12 @@ export default function InvoicePage() {
   const [clientPhone, setClientPhone] = useState('');
   const [staffName, setStaffName] = useState('김정 (보석감정사)');
   const [staffPhone, setStaffPhone] = useState('010-2306-7774');
-  const [productName, setProductName] = useState('5부 테니스 팔찌');
-  const [material, setMaterial] = useState('순금');
-  const [color, setColor] = useState('YG');
-  const [diamonds, setDiamonds] = useState<DiamondSpec[]>([]);
+  
+  // Dynamic Items
+  const [items, setItems] = useState<InvoiceItem[]>([
+    { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG' }
+  ]);
+  
   const [receiptNum, setReceiptNum] = useState('');
   const [currentDate, setCurrentDate] = useState('');
 
@@ -38,16 +46,36 @@ export default function InvoicePage() {
     setter(v);
   };
 
-  const addDiamond = () => {
-    setDiamonds([...diamonds, { id: Date.now(), size: '1부', qty: 1 }]);
+  const addItem = () => {
+    setItems([...items, { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG' }]);
   };
 
-  const removeDiamond = (id: number) => {
-    setDiamonds(diamonds.filter(d => d.id !== id));
+  const removeItem = (id: number) => {
+    setItems(items.filter(item => item.id !== id));
   };
 
-  const updateDiamond = (id: number, field: keyof DiamondSpec, value: any) => {
-    setDiamonds(diamonds.map(d => d.id === id ? { ...d, [field]: value } : d));
+  const updateItem = (id: number, field: keyof InvoiceItem, value: any) => {
+    setItems(items.map(item => {
+      if (item.id === id) {
+        const updated = { ...item, [field]: value };
+        // Reset defaults when switching types
+        if (field === 'type') {
+          if (value === '금') {
+            updated.material = '순금';
+            updated.color = 'YG';
+            delete updated.size;
+            delete updated.qty;
+          } else {
+            updated.size = '1부';
+            updated.qty = 1;
+            delete updated.material;
+            delete updated.color;
+          }
+        }
+        return updated;
+      }
+      return item;
+    }));
   };
 
   const sizeOptions = ['1부', '2부', '3부', '5부', '7부', '1캐럿', '2캐럿', '3캐럿'];
@@ -120,89 +148,122 @@ export default function InvoicePage() {
           </div>
 
           <div className={styles.formDivider}></div>
-          <p className={styles.panelTitle}>제품 정보</p>
+          <p className={styles.panelTitle}>제품 내역 등록</p>
 
-          <div className={styles.formGroup}>
-            <label>제품명 <span className={styles.req}>*</span></label>
-            <input 
-              type="text" 
-              className={styles.input}
-              value={productName} 
-              onChange={e => setProductName(e.target.value)} 
-            />
-          </div>
-
-          <div className={styles.row2}>
-            <div className={styles.formGroup}>
-              <label>재원</label>
-              <div className={styles.btnGroup}>
-                {['순금', '14K', '18K'].map(m => (
-                  <button 
-                    key={m}
-                    className={`${styles.btnToggle} ${material === m ? styles.active : ''}`}
-                    onClick={() => setMaterial(m)}
-                  >
-                    {m}
-                  </button>
-                ))}
+          {items.map((item, index) => (
+            <div key={item.id} className={styles.itemBlock}>
+              <div className={styles.itemHeader}>
+                <label>항목 {index + 1}</label>
+                {items.length > 1 && (
+                  <button className={styles.btnRemoveItem} onClick={() => removeItem(item.id)} title="항목 삭제">×</button>
+                )}
               </div>
-            </div>
-            <div className={styles.formGroup}>
-              <label>컬러</label>
-              <div className={styles.btnGroup}>
-                {['YG', 'WG', 'RG'].map(c => (
-                  <button 
-                    key={c}
-                    className={`${styles.btnToggle} ${color === c ? styles.active : ''}`}
-                    onClick={() => setColor(c)}
-                  >
-                    {c}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
 
-          <div className={styles.formDivider}></div>
-
-          {/* Diamond */}
-          <div className={styles.diamondHeader}>
-            <label>다이아 스펙</label>
-            <button className={styles.btnAdd} onClick={addDiamond}>
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" strokeWidth="1.8" strokeLinecap="round"/></svg>
-              항목 추가
-            </button>
-          </div>
-
-          <div className={styles.diamondList}>
-            {diamonds.map(d => (
-              <div key={d.id} className={styles.diamondRow}>
-                <select 
-                  value={d.size} 
-                  onChange={e => updateDiamond(d.id, 'size', e.target.value)}
-                >
-                  {sizeOptions.map(s => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
+              <div className={styles.formGroup}>
+                <label>제품명 <span className={styles.req}>*</span></label>
                 <input 
-                  type="number" 
-                  className={`${styles.input} ${styles.qtyInput}`} 
-                  min="1" 
-                  max="999" 
-                  value={d.qty}
-                  onChange={e => updateDiamond(d.id, 'qty', Number(e.target.value))} 
-                  placeholder="수량" 
+                  type="text" 
+                  className={styles.input}
+                  value={item.name} 
+                  onChange={e => updateItem(item.id, 'name', e.target.value)} 
+                  placeholder={item.type === '금' ? '예: 5부 테니스 팔찌' : '예: 우신 다이아몬드'}
                 />
-                <button className={styles.btnDel} onClick={() => removeDiamond(d.id)}>×</button>
               </div>
-            ))}
-          </div>
+
+              <div className={styles.formGroup}>
+                <label>제품 구분</label>
+                <div className={styles.btnGroup}>
+                  {['금', '다이아'].map(t => (
+                    <button 
+                      key={t}
+                      className={`${styles.btnToggle} ${item.type === t ? styles.active : ''}`}
+                      onClick={() => updateItem(item.id, 'type', t as ItemType)}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {item.type === '금' && (
+                <div className={styles.row2}>
+                  <div className={styles.formGroup}>
+                    <label>재원</label>
+                    <div className={styles.btnGroup}>
+                      {['순금', '14K', '18K'].map(m => (
+                        <button 
+                          key={m}
+                          className={`${styles.btnToggle} ${item.material === m ? styles.active : ''}`}
+                          onClick={() => updateItem(item.id, 'material', m)}
+                        >
+                          {m}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>컬러</label>
+                    <div className={styles.btnGroup}>
+                      {['YG', 'WG', 'RG'].map(c => (
+                        <button 
+                          key={c}
+                          className={`${styles.btnToggle} ${item.color === c ? styles.active : ''}`}
+                          onClick={() => updateItem(item.id, 'color', c)}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {item.type === '다이아' && (
+                <div className={styles.row2}>
+                  <div className={styles.formGroup}>
+                    <label>캐럿 / 사이즈</label>
+                    <select 
+                      className={styles.input}
+                      value={item.size} 
+                      onChange={e => updateItem(item.id, 'size', e.target.value)}
+                    >
+                      {sizeOptions.map(s => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>수량</label>
+                    <input 
+                      type="number" 
+                      className={styles.input} 
+                      min="1" 
+                      max="999" 
+                      value={item.qty || 1}
+                      onChange={e => updateItem(item.id, 'qty', Number(e.target.value))} 
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+
+          <button className={styles.btnAddItem} onClick={addItem}>
+            <svg width="14" height="14" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
+            항목 추가
+          </button>
         </div>
 
         {/* ── RIGHT: RECEIPT ── */}
         <div className={styles.receiptPanel}>
-
+          <style jsx global>{`
+            @media print {
+              .admin-tabs { display: none !important; }
+              header { display: none !important; }
+              footer { display: none !important; }
+            }
+          `}</style>
+          
           {/* Banner */}
           <div className={styles.receiptTopBanner}>
             <div className={styles.receiptBrand}>Jasmine Jewelry</div>
@@ -240,39 +301,35 @@ export default function InvoicePage() {
 
             <hr className={styles.receiptRuleDashed} />
 
-            {/* Product Info */}
+            {/* Product & Diamonds Table */}
             <div className={styles.rSectionLabel}>PRODUCT DETAILS</div>
-            <div className={styles.rRow}>
-              <span className={styles.rLabel}>제품명</span>
-              <span className={`${styles.rVal} ${!productName ? styles.empty : ''}`}>{productName || '—'}</span>
-            </div>
-            <div className={styles.rRow}>
-              <span className={styles.rLabel}>재원 / 컬러</span>
-              <span className={styles.rVal}>
-                <span className={`${styles.badge} ${styles.badgeMaterial}`}>{material}</span>
-                <span className={styles.badge} style={{ marginLeft: '4px' }}>{color}</span>
-              </span>
-            </div>
-
-            <hr className={styles.receiptRuleDashed} />
-
-            {/* Diamond Table */}
-            <div className={styles.rSectionLabel}>DIAMOND SPECIFICATION</div>
-            <table className={styles.diamondTable}>
+            <table className={styles.productTable}>
               <thead>
                 <tr>
-                  <th>캐럿 / 사이즈</th>
-                  <th>수량</th>
+                  <th>구분</th>
+                  <th>제품명</th>
+                  <th>스펙</th>
+                  <th style={{ textAlign: 'center' }}>수량</th>
                 </tr>
               </thead>
               <tbody>
-                {diamonds.length === 0 ? (
-                  <tr className={styles.noData}><td colSpan={2}>다이아 스펙을 추가해 주세요</td></tr>
+                {items.length === 0 ? (
+                  <tr className={styles.noData}><td colSpan={4}>등록된 제품이 없습니다</td></tr>
                 ) : (
-                  diamonds.map(d => (
-                    <tr key={d.id}>
-                      <td>◆ &nbsp;{d.size}</td>
-                      <td>{d.qty || 1} 개</td>
+                  items.map(item => (
+                    <tr key={item.id}>
+                      <td>
+                        <span className={`${styles.badge} ${item.type === '금' ? styles.badgeMaterial : ''}`}>
+                          {item.type}
+                        </span>
+                      </td>
+                      <td>{item.name || '—'}</td>
+                      <td>
+                        {item.type === '금' ? `${item.material} / ${item.color}` : item.size}
+                      </td>
+                      <td style={{ textAlign: 'center', fontWeight: 500 }}>
+                        {item.type === '금' ? '1 개' : `${item.qty || 1} 개`}
+                      </td>
                     </tr>
                   ))
                 )}
