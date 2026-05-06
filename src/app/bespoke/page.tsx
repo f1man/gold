@@ -94,7 +94,13 @@ export default function BespokePage() {
           </div>
           <Link href="/inquiry" className={styles.navLink}>상담문의</Link>
           <Link href="/bespoke" className={styles.active}>Bespoke</Link>
-          <Link href="/admin">Admin</Link>
+          <div className={styles.navItem}>
+            <span className={styles.navLink}>Admin</span>
+            <div className={styles.dropdown}>
+              <Link href="/admin">단가조정</Link>
+              <Link href="/admin/invoice">계산서 발행</Link>
+            </div>
+          </div>
         </nav>
       </header>
 

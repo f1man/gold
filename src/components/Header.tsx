@@ -32,7 +32,15 @@ export default function Header() {
           </div>
           <Link href="/inquiry" className={`${styles.navLink} ${pathname.startsWith('/inquiry') ? styles.active : ''}`}>상담문의</Link>
           <Link href="/bespoke" className={styles.navLink}>Bespoke (맞춤제작)</Link>
-          <Link href="/admin" className={`${styles.navLink} ${pathname === '/admin' ? styles.active : ''}`}>관리자(Admin)</Link>
+          <div className={styles.navItem}>
+            <span className={`${styles.navLink} ${pathname.startsWith('/admin') ? styles.active : ''}`}>
+              관리자(Admin)
+            </span>
+            <div className={styles.dropdown}>
+              <Link href="/admin" className={pathname === '/admin' ? styles.activeDropdown : ''}>단가조정</Link>
+              <Link href="/admin/invoice" className={pathname === '/admin/invoice' ? styles.activeDropdown : ''}>계산서 발행</Link>
+            </div>
+          </div>
         </nav>
       </div>
     </header>
