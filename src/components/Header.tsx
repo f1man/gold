@@ -13,10 +13,10 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.container}`}>
-        <div className={styles.logo}>
+        <Link href="/" className={styles.logo} style={{ textDecoration: 'none' }}>
           <Gem className={styles.logoIcon} />
-          <span className={styles.logoText}>KOREA GOLD X</span>
-        </div>
+          <span className={styles.logoText}>JASMIN GOLD</span>
+        </Link>
         <nav className={styles.nav}>
           <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>시세조회</Link>
           <Link href="/details" className={`${styles.navLink} ${pathname === '/details' ? styles.active : ''}`}>세부조회</Link>
