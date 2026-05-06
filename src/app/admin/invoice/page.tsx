@@ -281,7 +281,7 @@ export default function InvoicePage() {
                   className={styles.input} 
                   min="1" 
                   max="999" 
-                  value={item.qty || 1}
+                  value={item.qty === 0 ? '' : (item.qty === undefined ? 1 : item.qty)}
                   onChange={e => updateItem(item.id, 'qty', Number(e.target.value))} 
                   style={{ maxWidth: '150px' }}
                 />
