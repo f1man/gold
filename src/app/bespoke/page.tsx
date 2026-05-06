@@ -92,6 +92,7 @@ export default function BespokePage() {
               <Link href="/products/coin">금화/은화</Link>
             </div>
           </div>
+          <Link href="/inquiry" className={styles.navLink}>상담문의</Link>
           <Link href="/bespoke" className={styles.active}>Bespoke</Link>
           <Link href="/admin">Admin</Link>
         </nav>

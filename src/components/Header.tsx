@@ -30,6 +30,7 @@ export default function Header() {
               <Link href="/products/coin" className={pathname === '/products/coin' ? styles.activeDropdown : ''}>금화/은화</Link>
             </div>
           </div>
+          <Link href="/inquiry" className={`${styles.navLink} ${pathname.startsWith('/inquiry') ? styles.active : ''}`}>상담문의</Link>
           <Link href="/bespoke" className={styles.navLink}>Bespoke (맞춤제작)</Link>
           <Link href="/admin" className={`${styles.navLink} ${pathname === '/admin' ? styles.active : ''}`}>관리자(Admin)</Link>
         </nav>
