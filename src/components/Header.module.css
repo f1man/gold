@@ -54,30 +54,79 @@
   gap: 2rem;
 }
 
-.nav a {
+.navLink {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-muted);
+  cursor: pointer;
   transition: color 0.2s ease;
   position: relative;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
 }
 
-.nav a:hover {
+.navLink:hover, .navLink.active {
   color: var(--foreground);
 }
 
-.nav a.active {
-  color: var(--foreground);
-}
-
-.nav a.active::after {
+.navLink.active::after {
   content: '';
   position: absolute;
-  bottom: -25px;
+  bottom: 0px;
   left: 0;
   width: 100%;
   height: 2px;
   background-color: var(--primary);
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 120px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 200;
+}
+
+.navItem:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown a {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.dropdown a:hover, .dropdown a.activeDropdown {
+  background: var(--background);
+  color: var(--foreground);
 }
 
 @media (max-width: 768px) {

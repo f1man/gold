@@ -18,13 +18,20 @@ export default function Header() {
           <span className={styles.logoText}>KOREA GOLD X</span>
         </div>
         <nav className={styles.nav}>
-          <Link href="/" className={pathname === '/' ? styles.active : ''}>시세조회</Link>
-          <Link href="/details" className={pathname === '/details' ? styles.active : ''}>세부조회</Link>
-          <Link href="/products/goldbar" className={pathname === '/products/goldbar' ? styles.active : ''}>골드바</Link>
-          <Link href="/products/silverbar" className={pathname === '/products/silverbar' ? styles.active : ''}>실버바</Link>
-          <Link href="/products/coin" className={pathname === '/products/coin' ? styles.active : ''}>금화/은화</Link>
-          <Link href="/bespoke" className={pathname === '/bespoke' ? styles.active : ''}>Bespoke (맞춤제작)</Link>
-          <Link href="/admin" className={pathname === '/admin' ? styles.active : ''}>관리자(Admin)</Link>
+          <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>시세조회</Link>
+          <Link href="/details" className={`${styles.navLink} ${pathname === '/details' ? styles.active : ''}`}>세부조회</Link>
+          <div className={styles.navItem}>
+            <span className={`${styles.navLink} ${pathname.startsWith('/products') ? styles.active : ''}`}>
+              쇼핑몰
+            </span>
+            <div className={styles.dropdown}>
+              <Link href="/products/goldbar" className={pathname === '/products/goldbar' ? styles.activeDropdown : ''}>골드바</Link>
+              <Link href="/products/silverbar" className={pathname === '/products/silverbar' ? styles.activeDropdown : ''}>실버바</Link>
+              <Link href="/products/coin" className={pathname === '/products/coin' ? styles.activeDropdown : ''}>금화/은화</Link>
+            </div>
+          </div>
+          <Link href="/bespoke" className={styles.navLink}>Bespoke (맞춤제작)</Link>
+          <Link href="/admin" className={`${styles.navLink} ${pathname === '/admin' ? styles.active : ''}`}>관리자(Admin)</Link>
         </nav>
       </div>
     </header>

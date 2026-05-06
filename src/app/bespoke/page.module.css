@@ -103,15 +103,16 @@
   gap: 2.5rem;
   align-items: center;
 }
-.nav a {
+.nav a, .navLink {
   font-family: 'Cinzel', serif;
   font-size: 0.6rem;
   letter-spacing: 0.25em;
   color: var(--muted);
   text-decoration: none;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
-.nav a:hover, .nav a.active {
+.nav a:hover, .nav a.active, .navLink:hover {
   color: var(--gold-light);
 }
 .nav a.active {
@@ -124,6 +125,52 @@
   left: 0; right: 0;
   height: 1px;
   background: var(--gold);
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 10px 0;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 140px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.navItem:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown a {
+  font-family: 'Noto Serif KR', serif;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.dropdown a:hover {
+  color: var(--gold-light);
 }
 
 /* ─── HERO ─── */

@@ -1,7 +1,7 @@
 {
   "pure_buy": {
-    "type": "+원",
-    "value": 1
+    "type": "-원",
+    "value": 2
   },
   "pure_sell": {
     "type": "+원",

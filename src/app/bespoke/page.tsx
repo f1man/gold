@@ -84,9 +84,14 @@ export default function BespokePage() {
         <nav className={styles.nav}>
           <Link href="/">시세조회</Link>
           <Link href="/details">세부조회</Link>
-          <Link href="/products/goldbar">골드바</Link>
-          <Link href="/products/silverbar">실버바</Link>
-          <Link href="/products/coin">금화/은화</Link>
+          <div className={styles.navItem}>
+            <span className={styles.navLink}>쇼핑몰</span>
+            <div className={styles.dropdown}>
+              <Link href="/products/goldbar">골드바</Link>
+              <Link href="/products/silverbar">실버바</Link>
+              <Link href="/products/coin">금화/은화</Link>
+            </div>
+          </div>
           <Link href="/bespoke" className={styles.active}>Bespoke</Link>
           <Link href="/admin">Admin</Link>
         </nav>
