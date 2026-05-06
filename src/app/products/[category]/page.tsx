@@ -3,8 +3,9 @@ import ProductGrid from '@/components/ProductGrid';
 import styles from './page.module.css';
 import { notFound } from 'next/navigation';
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
-  const { category } = params;
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const resolvedParams = await params;
+  const category = resolvedParams.category;
 
   // Validate category
   if (!['goldbar', 'silverbar', 'coin'].includes(category)) {
