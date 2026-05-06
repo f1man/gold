@@ -1,42 +1,42 @@
 {
   "pure_buy": {
     "type": "-원",
-    "value": 2
+    "value": 500
   },
   "pure_sell": {
-    "type": "+원",
-    "value": 2
+    "type": "-원",
+    "value": 500
   },
   "k18_buy": {
-    "type": "+원",
-    "value": 3
+    "type": "-원",
+    "value": 500
   },
   "k18_sell": {
-    "type": "+원",
-    "value": 4
+    "type": "-원",
+    "value": 500
   },
   "k14_buy": {
-    "type": "+원",
-    "value": 5
+    "type": "-원",
+    "value": 500
   },
   "k14_sell": {
-    "type": "+원",
-    "value": 6
+    "type": "-원",
+    "value": 499
   },
   "plat_buy": {
-    "type": "+원",
-    "value": 7
+    "type": "-원",
+    "value": 500
   },
   "plat_sell": {
-    "type": "+원",
-    "value": 8
+    "type": "-원",
+    "value": 499
   },
   "silver_buy": {
-    "type": "+원",
-    "value": 9
+    "type": "-원",
+    "value": 500
   },
   "silver_sell": {
-    "type": "+원",
-    "value": 0
+    "type": "-원",
+    "value": 500
   }
 }

@@ -8,5 +8,17 @@
     "createdAt": "2026-05-06T04:43:09.110Z",
     "reply": "안되이놈아",
     "replyCreatedAt": "2026-05-06T04:43:42.423Z"
+  },
+  {
+    "id": "c2a492e7-a330-4470-a934-9e65e339f2fd",
+    "title": "커플링 문의합니다.",
+    "content": "싸면서 좋은거? 있어요?",
+    "author": "구동호",
+    "password": "1111",
+    "contact": "010-2978-0864",
+    "inquiryType": "커플링",
+    "createdAt": "2026-05-06T04:47:55.570Z",
+    "reply": null,
+    "replyCreatedAt": null
   }
 ]
