@@ -34,6 +34,8 @@ export async function POST(request: Request) {
         title: inquiry.title,
         content: inquiry.content,
         author: inquiry.author,
+        contact: inquiry.contact,
+        inquiryType: inquiry.inquiryType,
         createdAt: inquiry.createdAt,
         reply: inquiry.reply,
         replyCreatedAt: inquiry.replyCreatedAt

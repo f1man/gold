@@ -70,9 +70,10 @@ export default function InquiryDetail({ params }: { params: Promise<{ id: string
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>{inquiry.title}</h1>
+        <h1 className={styles.title}>[{inquiry.inquiryType}] {inquiry.title}</h1>
         <div className={styles.meta}>
           <span><strong>작성자</strong> {inquiry.author}</span>
+          <span><strong>연락처</strong> {inquiry.contact}</span>
           <span><strong>작성일</strong> {formatDate(inquiry.createdAt)}</span>
         </div>
       </div>

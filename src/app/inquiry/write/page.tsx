@@ -11,6 +11,8 @@ export default function WriteInquiry() {
     title: '',
     author: '',
     password: '',
+    contact: '',
+    inquiryType: '커플링',
     content: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,7 +26,7 @@ export default function WriteInquiry() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.title || !formData.author || !formData.password || !formData.content) {
+    if (!formData.title || !formData.author || !formData.password || !formData.contact || !formData.content) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
@@ -81,6 +83,38 @@ export default function WriteInquiry() {
               onChange={handleChange}
               placeholder="글을 확인할 때 필요합니다"
             />
+          </div>
+        </div>
+
+        <div className={styles.row}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="contact">연락처</label>
+            <input 
+              type="tel" 
+              id="contact" 
+              name="contact" 
+              className={styles.input}
+              value={formData.contact}
+              onChange={handleChange}
+              placeholder="010-0000-0000"
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="inquiryType">상담 유형</label>
+            <select 
+              id="inquiryType" 
+              name="inquiryType" 
+              className={styles.select}
+              value={formData.inquiryType}
+              onChange={handleChange as any}
+            >
+              <option value="커플링">커플링</option>
+              <option value="다이아몬드링">다이아몬드링</option>
+              <option value="목걸이">목걸이</option>
+              <option value="귀걸이">귀걸이</option>
+              <option value="팔찌">팔찌</option>
+              <option value="기타">기타</option>
+            </select>
           </div>
         </div>
 

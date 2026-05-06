@@ -31,9 +31,9 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { title, content, author, password } = body;
+    const { title, content, author, password, contact, inquiryType } = body;
 
-    if (!title || !content || !author || !password) {
+    if (!title || !content || !author || !password || !contact) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -48,6 +48,8 @@ export async function POST(request: Request) {
       content,
       author,
       password, // Stored plainly for demo purposes
+      contact,
+      inquiryType: inquiryType || '기타',
       createdAt: new Date().toISOString(),
       reply: null,
       replyCreatedAt: null
