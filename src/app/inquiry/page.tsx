@@ -91,10 +91,10 @@ export default function InquiryList() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th width="10%">상태</th>
-              <th width="50%">제목</th>
-              <th width="20%">작성자</th>
-              <th width="20%">작성일</th>
+              <th style={{ width: '10%' }}>상태</th>
+              <th style={{ width: '50%' }}>제목</th>
+              <th style={{ width: '20%' }}>작성자</th>
+              <th style={{ width: '20%' }}>작성일</th>
             </tr>
           </thead>
           <tbody>
