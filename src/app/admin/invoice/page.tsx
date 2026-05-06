@@ -64,7 +64,7 @@ export default function InvoicePage() {
             updated.material = '순금';
             updated.color = 'YG';
             delete updated.size;
-            delete updated.qty;
+            updated.qty = 1;
           } else {
             updated.size = '1부';
             updated.qty = 1;
@@ -232,19 +232,21 @@ export default function InvoicePage() {
                       ))}
                     </select>
                   </div>
-                  <div className={styles.formGroup}>
-                    <label>수량</label>
-                    <input 
-                      type="number" 
-                      className={styles.input} 
-                      min="1" 
-                      max="999" 
-                      value={item.qty || 1}
-                      onChange={e => updateItem(item.id, 'qty', Number(e.target.value))} 
-                    />
-                  </div>
                 </div>
               )}
+
+              <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
+                <label>수량</label>
+                <input 
+                  type="number" 
+                  className={styles.input} 
+                  min="1" 
+                  max="999" 
+                  value={item.qty || 1}
+                  onChange={e => updateItem(item.id, 'qty', Number(e.target.value))} 
+                  style={{ maxWidth: '150px' }}
+                />
+              </div>
             </div>
           ))}
 
@@ -328,7 +330,7 @@ export default function InvoicePage() {
                         {item.type === '금' ? `${item.material} / ${item.color}` : item.size}
                       </td>
                       <td style={{ textAlign: 'center', fontWeight: 500 }}>
-                        {item.type === '금' ? '1 개' : `${item.qty || 1} 개`}
+                        {item.qty || 1} 개
                       </td>
                     </tr>
                   ))
