@@ -578,6 +578,7 @@
   .asBox, .storeInfo {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
 }
 
 /* ── MOBILE RESPONSIVE ── */
