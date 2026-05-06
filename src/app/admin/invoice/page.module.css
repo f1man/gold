@@ -1,0 +1,577 @@
+.wrapper {
+  background: linear-gradient(145deg, #FDF0F3 0%, #FAE8EE 50%, #F5EAF0 100%);
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #3A2530;
+  min-height: 100vh;
+  padding: 2.5rem;
+}
+
+/* ── PAGE TITLE ── */
+.pageHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.pageHeader .brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.55em;
+  color: #9E6678;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.pageHeader h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #3A2530;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+.pageHeader .subtitle {
+  font-size: 0.85rem;
+  color: #C4A0AC;
+  letter-spacing: 0.15em;
+  margin-top: 0.4rem;
+}
+.titleRule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.titleRule span {
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(to right, transparent, #E8A0B0);
+}
+.titleRule span:last-child {
+  background: linear-gradient(to left, transparent, #E8A0B0);
+}
+.titleRule i { color: #C97D8F; font-style: normal; font-size: 0.8rem; }
+
+/* ── LAYOUT ── */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1240px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* ── PANEL BASE ── */
+.panel {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 2.2rem 2rem;
+  box-shadow: 0 8px 40px rgba(158,102,120,0.12), 0 2px 12px rgba(158,102,120,0.06);
+  border: 1px solid rgba(242,196,206,0.5);
+}
+
+.panelTitle {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.45em;
+  color: #9E6678;
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0;
+}
+.panelTitle::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #F2C4CE, transparent);
+}
+
+/* ── FORM ── */
+.formGroup {
+  margin-bottom: 1.4rem;
+}
+.formGroup label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6B4A57;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.45rem;
+}
+.formGroup label .req { color: #C97D8F; margin-left: 2px; }
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #F0D8DE;
+  border-radius: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.95rem;
+  color: #3A2530;
+  background: #FDF6F8;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus, .textarea:focus {
+  border-color: #E8A0B0;
+  box-shadow: 0 0 0 3px rgba(242,196,206,0.35);
+  background: #FFFFFF;
+}
+.input::placeholder { color: #CDB0BA; }
+
+/* Phone group */
+.phoneRow {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0.5rem;
+}
+.phonePrefix {
+  text-align: center;
+  background: linear-gradient(135deg, #FDE8EE, #F5D5DF);
+  border: 1.5px solid #F0D8DE;
+  border-radius: 10px;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #9E6678;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── BUTTON GROUP ── */
+.btnGroup {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.btnToggle {
+  flex: 1;
+  min-width: 60px;
+  padding: 0.65rem 0.8rem;
+  border: 1.5px solid #F0D8DE;
+  border-radius: 10px;
+  background: #FDF6F8;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #C4A0AC;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.btnToggle:hover {
+  border-color: #E8A0B0;
+  color: #9E6678;
+}
+.btnToggle.active {
+  background: linear-gradient(135deg, #F2C4CE, #E8A0B0);
+  border-color: #E8A0B0;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(232,160,176,0.4);
+}
+
+/* ── DIAMOND SECTION ── */
+.diamondHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+.diamondHeader label { margin: 0; }
+.btnAdd {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: linear-gradient(135deg, #F2C4CE, #E8A0B0);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.btnAdd:hover { box-shadow: 0 4px 12px rgba(232,160,176,0.5); transform: translateY(-1px); }
+
+.diamondList { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.diamondRow {
+  display: grid;
+  grid-template-columns: 1fr 100px 36px;
+  gap: 0.5rem;
+  align-items: center;
+  animation: slideIn 0.25s cubic-bezier(0.23,1,0.32,1);
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.diamondRow select {
+  padding: 0.65rem 0.8rem;
+  border: 1.5px solid #F0D8DE;
+  border-radius: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.95rem;
+  color: #3A2530;
+  background: #FDF6F8;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C97D8F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.diamondRow select:focus { border-color: #E8A0B0; outline: none; }
+
+.qtyInput {
+  padding: 0.65rem 0.5rem !important;
+  text-align: center;
+}
+
+.btnDel {
+  width: 36px; height: 36px;
+  border: 1.5px solid #F0D8DE;
+  border-radius: 8px;
+  background: #FDF6F8;
+  color: #C4A0AC;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.btnDel:hover { background: #FFE8EE; border-color: #E8A0B0; color: #C97D8F; }
+
+/* ── DIVIDER ── */
+.formDivider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #F2C4CE, transparent);
+  margin: 1.6rem 0;
+}
+
+/* Row 2-col */
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ── RECEIPT PANEL ── */
+.receiptPanel {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(158,102,120,0.12), 0 2px 12px rgba(158,102,120,0.06);
+  border: 1px solid rgba(242,196,206,0.5);
+  overflow: hidden;
+  position: sticky;
+  top: 2rem;
+}
+
+/* Receipt itself */
+.receipt {
+  padding: 2.5rem 2rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  position: relative;
+}
+
+/* Top rose banner */
+.receiptTopBanner {
+  background: linear-gradient(135deg, #F2C4CE 0%, #E8A0B0 50%, #D88498 100%);
+  padding: 1.8rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.receiptTopBanner::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; left: 0; right: 0;
+  height: 20px;
+  background: #FFFFFF;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.receiptBrand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  font-style: italic;
+  color: white;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.receiptBrandSub {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.6em;
+  color: rgba(255,255,255,0.85);
+  display: block;
+  margin-top: 0.3rem;
+}
+
+/* Receipt header meta */
+.receiptMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 2rem 0 1.5rem;
+  padding-top: 0.5rem;
+}
+.receiptMetaLeft { font-size: 0.85rem; color: #6B4A57; line-height: 1.9; }
+.receiptMetaRight { text-align: right; font-size: 0.85rem; color: #6B4A57; line-height: 1.9; }
+.receiptNum {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #9E6678;
+  letter-spacing: 0.05em;
+}
+
+.receiptRule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #E8A0B0, transparent);
+  margin: 1rem 0;
+}
+.receiptRuleDashed {
+  border: none;
+  border-top: 1.5px dashed #F0D8DE;
+  margin: 1.2rem 0;
+}
+
+/* Section label */
+.rSectionLabel {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: #9E6678;
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.rSectionLabel::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, #F2C4CE, transparent); }
+
+/* Info rows */
+.rRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.55rem;
+}
+.rLabel {
+  font-size: 0.85rem;
+  color: #C4A0AC;
+  font-weight: 400;
+  flex-shrink: 0;
+  width: 90px;
+}
+.rVal {
+  font-size: 0.95rem;
+  color: #3A2530;
+  font-weight: 500;
+  text-align: right;
+  flex: 1;
+}
+.rVal.empty { color: #D8C0C8; font-weight: 300; font-style: italic; }
+
+/* Diamond table */
+.diamondTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+.diamondTable th {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: #9E6678;
+  text-align: left;
+  padding: 0.5rem 0.5rem;
+  background: linear-gradient(to right, #FDE8EE, #FAF0F2);
+  font-weight: 400;
+}
+.diamondTable td {
+  padding: 0.65rem 0.5rem;
+  color: #3A2530;
+  border-bottom: 1px solid #F5E0E6;
+  font-size: 0.9rem;
+}
+.diamondTable tr:last-child td { border-bottom: none; }
+.diamondTable .noData td {
+  color: #D8C0C8;
+  font-style: italic;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* Badge chips */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, #F2C4CE, #E8A0B0);
+  color: white;
+  letter-spacing: 0.05em;
+}
+.badgeMaterial {
+  background: linear-gradient(135deg, #E8D5B0, #C9A97A);
+}
+
+/* As guarantee box */
+.asBox {
+  background: linear-gradient(135deg, #FDF0F3, #FAE8EE);
+  border: 1px solid #F0D8DE;
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  margin-top: 1.2rem;
+}
+.asTitle {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: #9E6678;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.asTitle::before { content: '♦'; font-size: 0.6rem; }
+.asText {
+  font-size: 0.85rem;
+  color: #6B4A57;
+  line-height: 1.9;
+}
+.asText strong { color: #9E6678; font-weight: 500; }
+
+/* Store info bottom */
+.storeInfo {
+  margin-top: 1.5rem;
+  padding: 1.2rem 1.4rem;
+  background: #FDF6F8;
+  border-radius: 12px;
+  border: 1px solid #F0D8DE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.storeNameBlock { display: flex; align-items: center; gap: 0.7rem; }
+.storeGem {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, #F2C4CE, #D88498);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  color: white;
+  flex-shrink: 0;
+}
+.storeName { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: #3A2530; margin: 0; }
+.storeDetail { font-size: 0.75rem; color: #C4A0AC; line-height: 1.8; text-align: right; }
+
+/* Signature line */
+.sigRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #F0D8DE;
+}
+.sigLabel { font-size: 0.85rem; color: #C4A0AC; }
+.sigLine {
+  width: 100px;
+  height: 1px;
+  background: #E8A0B0;
+}
+.sigName { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: #3A2530; }
+
+/* Seal/stamp decoration */
+.receiptStamp {
+  position: absolute;
+  bottom: 5.5rem;
+  right: 2.5rem;
+  width: 74px; height: 74px;
+  border: 2px solid rgba(242,196,206,0.6);
+  border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: rgba(201,122,143,0.35);
+  font-family: 'Cinzel', serif;
+  font-size: 0.45rem;
+  letter-spacing: 0.15em;
+  text-align: center;
+  line-height: 1.6;
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+.receiptStamp::before {
+  content: '✦';
+  display: block;
+  font-size: 1rem;
+  color: rgba(201,122,143,0.25);
+  margin-bottom: 2px;
+}
+
+/* Print button area */
+.printArea {
+  padding: 1.2rem 2rem 1.8rem;
+  border-top: 1px solid #F5E0E6;
+  background: #FDF6F8;
+}
+.btnPrint {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #F2C4CE, #E8A0B0, #D88498);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(232,160,176,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+.btnPrint:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(232,160,176,0.55);
+}
+.btnPrint:active { transform: translateY(0); }
+.btnPrint svg { flex-shrink: 0; }
+
+/* ── PRINT STYLES ── */
+@media print {
+  .wrapper {
+    background: white !important;
+    padding: 0 !important;
+  }
+  .pageHeader,
+  .formCol,
+  .printArea {
+    display: none !important;
+  }
+  .layout {
+    display: block !important;
+  }
+  .receiptPanel {
+    box-shadow: none !important;
+    border: none !important;
+    position: static !important;
+  }
+  .receiptTopBanner {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .asBox, .storeInfo {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
