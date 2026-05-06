@@ -171,6 +171,18 @@
   color: #FFFFFF;
   box-shadow: 0 4px 14px rgba(232,160,176,0.4);
 }
+.textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #F0D8DE;
+  border-radius: 12px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.95rem;
+  color: #3A2530;
+  background: #FDF6F8;
+  transition: all 0.2s;
+  resize: vertical;
+}
 
 /* ── DYNAMIC ITEMS ── */
 .itemBlock {
@@ -378,6 +390,20 @@
   border-bottom: 1px solid #F5E0E6;
 }
 .productTable tr:last-child td { border-bottom: none; }
+.productTable tr.hasNote td {
+  border-bottom: none;
+  padding-bottom: 0.2rem;
+}
+.productTable tr.noteRow td {
+  padding-top: 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #F5E0E6;
+  color: #6B4A57;
+  font-size: 0.75rem !important;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+.productTable tr.noteRow:last-child td { border-bottom: none; }
 .productTable .noData td {
   color: #D8C0C8;
   font-style: italic;

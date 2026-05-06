@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './page.module.css';
 
 type ItemType = '금' | '다이아';
@@ -16,6 +16,7 @@ interface InvoiceItem {
   weight?: string;
   spec?: string;
   gemstone?: string;
+  note?: string;
 }
 
 export default function InvoicePage() {
@@ -26,7 +27,7 @@ export default function InvoicePage() {
   
   // Dynamic Items
   const [items, setItems] = useState<InvoiceItem[]>([
-    { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '' }
+    { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '', note: '' }
   ]);
   
   const [receiptNum, setReceiptNum] = useState('');
@@ -50,7 +51,7 @@ export default function InvoicePage() {
   };
 
   const addItem = () => {
-    setItems([...items, { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '' }]);
+    setItems([...items, { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '', note: '' }]);
   };
 
   const removeItem = (id: number) => {
@@ -285,6 +286,17 @@ export default function InvoicePage() {
                   style={{ maxWidth: '150px' }}
                 />
               </div>
+
+              <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
+                <label>비고</label>
+                <textarea 
+                  className={styles.textarea} 
+                  value={item.note || ''}
+                  onChange={e => updateItem(item.id, 'note', e.target.value)} 
+                  placeholder="추가 요청사항이나 특이사항을 입력하세요"
+                  rows={2}
+                />
+              </div>
             </div>
           ))}
 
@@ -366,20 +378,30 @@ export default function InvoicePage() {
                     };
 
                     return (
-                      <tr key={item.id}>
-                        <td>
-                          <span className={`${styles.badge} ${item.type === '금' ? styles.badgeMaterial : ''}`}>
-                            {item.type}
-                          </span>
-                        </td>
-                        <td>{item.type === '다이아' ? `[다이아] ${item.name || ''}` : (item.name || '—')}</td>
-                        <td style={{ fontSize: '0.8rem' }}>{getSpec()}</td>
-                        <td style={{ fontSize: '0.8rem' }}>{item.weight || '—'}</td>
-                        <td style={{ fontSize: '0.8rem' }}>{item.gemstone || '—'}</td>
-                        <td style={{ textAlign: 'center', fontWeight: 500 }}>
-                          {item.qty || 1} 개
-                        </td>
-                      </tr>
+                      <React.Fragment key={item.id}>
+                        <tr className={item.note ? styles.hasNote : ''}>
+                          <td>
+                            <span className={`${styles.badge} ${item.type === '금' ? styles.badgeMaterial : ''}`}>
+                              {item.type}
+                            </span>
+                          </td>
+                          <td>{item.type === '다이아' ? `[다이아] ${item.name || ''}` : (item.name || '—')}</td>
+                          <td style={{ fontSize: '0.8rem' }}>{getSpec()}</td>
+                          <td style={{ fontSize: '0.8rem' }}>{item.weight || '—'}</td>
+                          <td style={{ fontSize: '0.8rem' }}>{item.gemstone || '—'}</td>
+                          <td style={{ textAlign: 'center', fontWeight: 500 }}>
+                            {item.qty || 1} 개
+                          </td>
+                        </tr>
+                        {item.note && (
+                          <tr className={styles.noteRow}>
+                            <td></td>
+                            <td colSpan={5}>
+                              {item.note}
+                            </td>
+                          </tr>
+                        )}
+                      </React.Fragment>
                     );
                   })
                 )}
