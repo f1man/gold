@@ -43,6 +43,62 @@ export default function InvoicePage() {
     setCurrentDate(`${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`);
   }, []);
 
+  const [isSaving, setIsSaving] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [historyList, setHistoryList] = useState<any[]>([]);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      const payload = {
+        receiptNum,
+        currentDate,
+        clientName,
+        clientPhone,
+        staffName,
+        staffPhone,
+        items
+      };
+      const res = await fetch('/api/invoices', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        alert('영수증이 저장되었습니다.');
+      } else {
+        alert('저장에 실패했습니다.');
+      }
+    } catch (e) {
+      alert('저장 중 오류가 발생했습니다.');
+    }
+    setIsSaving(false);
+  };
+
+  const loadHistory = async () => {
+    try {
+      const res = await fetch('/api/invoices');
+      if (res.ok) {
+        const data = await res.json();
+        setHistoryList(data);
+        setShowHistory(true);
+      }
+    } catch (e) {
+      alert('목록을 불러오는 중 오류가 발생했습니다.');
+    }
+  };
+
+  const selectHistory = (invoice: any) => {
+    setReceiptNum(invoice.receiptNum);
+    setCurrentDate(invoice.currentDate);
+    setClientName(invoice.clientName || '');
+    setClientPhone(invoice.clientPhone || '');
+    setStaffName(invoice.staffName || '');
+    setStaffPhone(invoice.staffPhone || '');
+    setItems(invoice.items || []);
+    setShowHistory(false);
+  };
+
   const addItem = () => {
     setItems([...items, { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '', note: '' }]);
   };
@@ -79,6 +135,34 @@ export default function InvoicePage() {
 
   return (
     <div className={styles.wrapper}>
+      {showHistory && (
+        <div className={styles.modalOverlay} onClick={() => setShowHistory(false)}>
+          <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h3>영수증 불러오기 (최근 순)</h3>
+              <button onClick={() => setShowHistory(false)}>×</button>
+            </div>
+            <div className={styles.historyList}>
+              {historyList.length === 0 ? (
+                <div className={styles.emptyHistory}>저장된 내역이 없습니다.</div>
+              ) : (
+                historyList.map((inv: any) => (
+                  <div key={inv.id} className={styles.historyItem} onClick={() => selectHistory(inv)}>
+                    <div className={styles.historyTitle}>
+                      {inv.clientName || '이름없음'} <span>({inv.clientPhone ? inv.clientPhone.replace(/\D/g, '') : '연락처없음'})</span>
+                    </div>
+                    <div className={styles.historyMeta}>
+                      <span>{inv.receiptNum}</span>
+                      <span>{inv.currentDate}</span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Page Header */}
       <div className={styles.pageHeader}>
         <span className={styles.brand}>JASMINE JEWELRY — ATELIER</span>
@@ -434,6 +518,14 @@ export default function InvoicePage() {
 
           {/* Print button */}
           <div className={styles.printArea}>
+            <div className={styles.actionButtons}>
+              <button className={styles.btnAction} onClick={loadHistory}>
+                불러오기
+              </button>
+              <button className={styles.btnAction} onClick={handleSave} disabled={isSaving}>
+                {isSaving ? '저장 중...' : '저장하기'}
+              </button>
+            </div>
             <button className={styles.btnPrint} onClick={() => window.print()}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="6 9 6 2 18 2 18 9"></polyline>
