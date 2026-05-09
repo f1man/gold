@@ -43,13 +43,6 @@ export default function InvoicePage() {
     setCurrentDate(`${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`);
   }, []);
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (val: string) => void) => {
-    let v = e.target.value.replace(/\D/g, '');
-    if (v.length > 8) v = v.slice(0, 8);
-    if (v.length > 4) v = v.slice(0, 4) + '-' + v.slice(4);
-    setter(v);
-  };
-
   const addItem = () => {
     setItems([...items, { id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '', note: '' }]);
   };
@@ -117,14 +110,12 @@ export default function InvoicePage() {
               <div className={styles.phoneRow}>
                 <div className={styles.phonePrefix}>010</div>
                 <input 
-                  type="text" 
-                  inputMode="numeric"
-                  pattern="[0-9]*"
+                  type="tel" 
                   className={styles.input}
                   value={clientPhone} 
-                  onChange={e => handlePhoneChange(e, setClientPhone)} 
-                  placeholder="0000-0000" 
-                  maxLength={9}
+                  onChange={e => setClientPhone(e.target.value)} 
+                  placeholder="00000000" 
+                  maxLength={11}
                 />
               </div>
             </div>
@@ -343,7 +334,11 @@ export default function InvoicePage() {
             </div>
             <div className={styles.rRow}>
               <span className={styles.rLabel}>연락처</span>
-              <span className={`${styles.rVal} ${!clientPhone ? styles.empty : ''}`}>{clientPhone ? `010-${clientPhone}` : '—'}</span>
+              <span className={`${styles.rVal} ${!clientPhone ? styles.empty : ''}`}>
+                {clientPhone 
+                  ? `010-${clientPhone.replace(/\D/g, '').length === 8 ? clientPhone.replace(/\D/g, '').replace(/(\d{4})(\d{4})/, '$1-$2') : clientPhone.replace(/\D/g, '').length === 7 ? clientPhone.replace(/\D/g, '').replace(/(\d{3})(\d{4})/, '$1-$2') : clientPhone}` 
+                  : '—'}
+              </span>
             </div>
 
             <hr className={styles.receiptRuleDashed} />
