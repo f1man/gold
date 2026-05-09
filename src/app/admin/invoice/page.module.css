@@ -620,4 +620,17 @@
     box-shadow: 0 4px 20px rgba(153,122,61,0.1);
     margin-bottom: 1rem;
   }
+  .receiptMeta {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .receiptMetaRight {
+    text-align: left;
+  }
+  .rRow {
+    justify-content: flex-start;
+  }
+  .rVal {
+    text-align: left;
+  }
 }
