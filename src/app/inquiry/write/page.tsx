@@ -90,7 +90,9 @@ export default function WriteInquiry() {
           <div className={styles.inputGroup}>
             <label htmlFor="contact">연락처</label>
             <input 
-              type="tel" 
+              type="text" 
+              inputMode="numeric"
+              pattern="[0-9\-]*"
               id="contact" 
               name="contact" 
               className={styles.input}

@@ -117,11 +117,14 @@ export default function InvoicePage() {
               <div className={styles.phoneRow}>
                 <div className={styles.phonePrefix}>010</div>
                 <input 
-                  type="tel" 
+                  type="text" 
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   className={styles.input}
                   value={clientPhone} 
                   onChange={e => handlePhoneChange(e, setClientPhone)} 
                   placeholder="0000-0000" 
+                  maxLength={9}
                 />
               </div>
             </div>
@@ -144,6 +147,8 @@ export default function InvoicePage() {
               <label>담당자 연락처</label>
               <input 
                 type="text" 
+                inputMode="numeric"
+                pattern="[0-9\-]*"
                 className={styles.input}
                 value={staffPhone} 
                 onChange={e => setStaffPhone(e.target.value)} 
