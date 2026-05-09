@@ -33,15 +33,52 @@ export default function InvoicePage() {
   const [receiptNum, setReceiptNum] = useState('');
   const [currentDate, setCurrentDate] = useState('');
 
-  useEffect(() => {
-    // Generate receipt number on client mount
+  const generateNewReceiptNum = async () => {
     const d = new Date();
     const pad = (n: number) => String(n).padStart(2, '0');
     const dateStr = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
-    const rand = Math.floor(1000 + Math.random() * 9000);
-    setReceiptNum(`JS-${dateStr}-${rand}`);
+    
+    try {
+      const res = await fetch('/api/invoices');
+      if (res.ok) {
+        const invoices = await res.json();
+        const todayPrefix = `JS-${dateStr}-`;
+        const todayInvoices = invoices.filter((inv: any) => inv.receiptNum?.startsWith(todayPrefix));
+        
+        let maxSeq = 0;
+        todayInvoices.forEach((inv: any) => {
+          const parts = inv.receiptNum.split('-');
+          if (parts.length === 3) {
+            const seq = parseInt(parts[2], 10);
+            if (!isNaN(seq) && seq > maxSeq) {
+              maxSeq = seq;
+            }
+          }
+        });
+        
+        setReceiptNum(`${todayPrefix}${pad(maxSeq + 1)}`);
+      } else {
+        setReceiptNum(`JS-${dateStr}-01`);
+      }
+    } catch (e) {
+      setReceiptNum(`JS-${dateStr}-01`);
+    }
     setCurrentDate(`${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`);
+  };
+
+  useEffect(() => {
+    generateNewReceiptNum();
   }, []);
+
+  const handleNew = () => {
+    if (confirm('새 영수증을 작성하시겠습니까? 현재 입력된 내용은 초기화됩니다.')) {
+      setClientName('');
+      setClientPhone('');
+      setItems([{ id: Date.now(), name: '', type: '금', material: '순금', color: 'YG', weight: '', spec: '', gemstone: '', note: '' }]);
+      generateNewReceiptNum();
+    }
+  };
+
 
   const [isSaving, setIsSaving] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
@@ -519,6 +556,9 @@ export default function InvoicePage() {
           {/* Print button */}
           <div className={styles.printArea}>
             <div className={styles.actionButtons}>
+              <button className={styles.btnAction} onClick={handleNew}>
+                새로작성
+              </button>
               <button className={styles.btnAction} onClick={loadHistory}>
                 불러오기
               </button>
