@@ -586,6 +586,9 @@
   .layout {
     grid-template-columns: 1fr;
   }
+  .row2, .row3 {
+    grid-template-columns: 1fr;
+  }
   .receiptPanel {
     position: static;
   }
@@ -597,9 +600,6 @@
   }
   .pageHeader h1 {
     font-size: 1.8rem;
-  }
-  .row2, .row3 {
-    grid-template-columns: 1fr;
   }
   .panel {
     padding: 1.5rem 1rem;
