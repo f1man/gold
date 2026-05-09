@@ -245,7 +245,7 @@ export default function InvoicePage() {
               )}
 
               {item.type === '금' && (
-                <div className={styles.row3} style={{ marginTop: '1rem' }}>
+                <div className={styles.row2} style={{ marginTop: '1rem' }}>
                   <div className={styles.formGroup}>
                     <label>중량</label>
                     <input 
@@ -254,16 +254,6 @@ export default function InvoicePage() {
                       value={item.weight || ''}
                       onChange={e => updateItem(item.id, 'weight', e.target.value)} 
                       placeholder="예: 3.75g"
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>제원</label>
-                    <input 
-                      type="text" 
-                      className={styles.input} 
-                      value={item.spec || ''}
-                      onChange={e => updateItem(item.id, 'spec', e.target.value)} 
-                      placeholder="자유 입력"
                     />
                   </div>
                   <div className={styles.formGroup}>
@@ -377,9 +367,7 @@ export default function InvoicePage() {
                 ) : (
                   items.map(item => {
                     const getSpec = () => {
-                      let text = item.type === '금' ? `${item.material} / ${item.color}` : item.size;
-                      if (item.spec) text += ` / ${item.spec}`;
-                      return text;
+                      return item.type === '금' ? `${item.material} / ${item.color}` : item.size;
                     };
 
                     return (
