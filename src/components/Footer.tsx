@@ -12,9 +12,9 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.container}`}>
         <div className={styles.info}>
-          <h4>Korea Gold Exchange Tracker</h4>
-          <p>이 웹사이트는 한국금거래소의 시세 데이터를 바탕으로 구현된 데모 페이지입니다.</p>
-          <p className={styles.copyright}>&copy; 2026 Gold Price Tracker. All rights reserved.</p>
+          <h4>Jasmine Jewelry</h4>
+          <p>프리미엄 파인 주얼리, 자스민 주얼리</p>
+          <p className={styles.copyright}>&copy; 2026 Jasmine Jewelry. All rights reserved.</p>
         </div>
       </div>
     </footer>
